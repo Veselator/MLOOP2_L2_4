@@ -13,9 +13,6 @@ namespace MLOOP2_L2_4
         public string Title { get; private set; }
         private Dictionary<string, List<string>> _dictionary;
 
-        [JsonIgnore]
-        public Dictionary<string, List<string>> Dictionary => _dictionary;
-
         public LanguageDictionary()
         {
             _dictionary = new Dictionary<string, List<string>>();
