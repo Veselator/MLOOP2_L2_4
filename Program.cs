@@ -14,8 +14,8 @@ namespace MLOOP2_L2_4
 
         static void Main(string[] args)
         {
-            Console.OutputEncoding = Encoding.UTF8;
-            Console.InputEncoding = Encoding.UTF8;
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.InputEncoding = Encoding.Unicode;
             LoadDictionaries();
             CreateTestDictionary();
             ShowMainMenu();
@@ -66,13 +66,13 @@ namespace MLOOP2_L2_4
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine(" === СЛОВНИКИ ===");
+                Console.WriteLine("\n === СЛОВНИКИ ===\n");
                 Console.WriteLine(" 1. Створити словник");
                 Console.WriteLine(" 2. Керувати словниками");
                 Console.WriteLine(" 3. Пошук перекладу");
                 Console.WriteLine(" 4. Експорт слова");
                 Console.WriteLine(" 0. Вийти");
-                Console.Write(" Ваш вибір: ");
+                Console.Write(" Ваш вибір\n > ");
 
                 string choice = Console.ReadLine();
                 switch (choice)
@@ -103,13 +103,13 @@ namespace MLOOP2_L2_4
         static void CreateDictionary()
         {
             Console.Clear();
-            Console.WriteLine(" === СТВОРИТИ СЛОВНИК ===");
+            Console.WriteLine("\n === СТВОРИТИ СЛОВНИК ===");
 
             Console.WriteLine(" Виберіть вхідну мову:");
             Console.WriteLine(" 1. Українська");
             Console.WriteLine(" 2. Англійська");
             Console.WriteLine(" 3. Грецька");
-            Console.Write(" Ваш вибір: ");
+            Console.Write(" Ваш вибір\n > ");
 
             Language inLang = GetLanguageChoice();
             if (inLang == (Language)(-1)) return;
@@ -118,12 +118,12 @@ namespace MLOOP2_L2_4
             Console.WriteLine(" 1. Українська");
             Console.WriteLine(" 2. Англійська");
             Console.WriteLine(" 3. Грецька");
-            Console.Write(" Ваш вибір: ");
+            Console.Write(" Ваш вибір\n > ");
 
             Language outLang = GetLanguageChoice();
             if (outLang == (Language)(-1)) return;
 
-            Console.Write(" Введіть назву словника: ");
+            Console.Write(" Введіть назву словника\n > ");
             string title = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(title))
@@ -162,12 +162,12 @@ namespace MLOOP2_L2_4
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine(" === КЕРУВАННЯ СЛОВНИКАМИ ===");
+                Console.WriteLine("\n === КЕРУВАННЯ СЛОВНИКАМИ ===\n");
 
                 if (dictionaries.Count == 0)
                 {
                     Console.WriteLine(" Словники відсутні!");
-                    Console.WriteLine(" 0. Повернутися до головного меню");
+                    Console.Write(" 0. Повернутися до головного меню\n > ");
                     Console.ReadKey();
                     return;
                 }
@@ -177,7 +177,7 @@ namespace MLOOP2_L2_4
                     Console.WriteLine($" {i + 1}. {dictionaries[i].Title}");
                 }
                 Console.WriteLine(" 0. Повернутися до головного меню");
-                Console.Write(" Виберіть словник: ");
+                Console.Write(" Виберіть словник\n > ");
 
                 string choice = Console.ReadLine();
                 if (choice == "0") return;
@@ -199,13 +199,13 @@ namespace MLOOP2_L2_4
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($" === {dictionary.Title.ToUpper()} ===");
+                Console.WriteLine($"\n === {dictionary.Title.ToUpper()} ===\n");
                 Console.WriteLine(" 1. Додати слово");
                 Console.WriteLine(" 2. Замінити слово/переклад");
                 Console.WriteLine(" 3. Видалити слово/переклад");
                 Console.WriteLine(" 4. Показати всі слова");
                 Console.WriteLine(" 0. Повернутися назад");
-                Console.Write(" Ваш вибір: ");
+                Console.Write(" Ваш вибір\n > ");
 
                 string choice = Console.ReadLine();
                 switch (choice)
@@ -235,8 +235,8 @@ namespace MLOOP2_L2_4
         static void AddWord(LanguageDictionary dictionary)
         {
             Console.Clear();
-            Console.WriteLine(" === ДОДАТИ СЛОВО ===");
-            Console.Write(" Введіть слово: ");
+            Console.WriteLine("\n === ДОДАТИ СЛОВО ===\n");
+            Console.Write(" Введіть слово\n > ");
             string word = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(word))
@@ -246,7 +246,7 @@ namespace MLOOP2_L2_4
                 return;
             }
 
-            Console.Write(" Введіть переклад: ");
+            Console.Write(" Введіть переклад\n > ");
             string translation = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(translation))
@@ -264,8 +264,8 @@ namespace MLOOP2_L2_4
         static void ReplaceWord(LanguageDictionary dictionary)
         {
             Console.Clear();
-            Console.WriteLine(" === ЗАМІНИТИ СЛОВО/ПЕРЕКЛАД ===");
-            Console.Write(" Введіть слово для заміни: ");
+            Console.WriteLine("\n === ЗАМІНИТИ СЛОВО/ПЕРЕКЛАД ===\n");
+            Console.Write(" Введіть слово для заміни\n > ");
             string word = Console.ReadLine();
 
             if (!dictionary.ContainsWord(word))
@@ -284,7 +284,7 @@ namespace MLOOP2_L2_4
 
             Console.WriteLine(" 1. Замінити слово");
             Console.WriteLine(" 2. Замінити переклад");
-            Console.Write(" Ваш вибір: ");
+            Console.Write(" Ваш вибір\n > ");
 
             string choice = Console.ReadLine();
             if (choice == "1")
@@ -299,10 +299,10 @@ namespace MLOOP2_L2_4
             }
             else if (choice == "2")
             {
-                Console.Write(" Введіть номер перекладу для заміни: ");
+                Console.Write(" Введіть номер перекладу для заміни\n > ");
                 if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= translations.Count)
                 {
-                    Console.Write(" Введіть новий переклад: ");
+                    Console.Write(" Введіть новий переклад\n > ");
                     string newTranslation = Console.ReadLine();
                     if (!string.IsNullOrWhiteSpace(newTranslation))
                     {
@@ -317,8 +317,8 @@ namespace MLOOP2_L2_4
         static void DeleteWord(LanguageDictionary dictionary)
         {
             Console.Clear();
-            Console.WriteLine(" === ВИДАЛИТИ СЛОВО/ПЕРЕКЛАД ===");
-            Console.Write(" Введіть слово: ");
+            Console.WriteLine("\n === ВИДАЛИТИ СЛОВО/ПЕРЕКЛАД ===\n");
+            Console.Write(" Введіть слово\n > ");
             string word = Console.ReadLine();
 
             if (!dictionary.ContainsWord(word))
@@ -336,7 +336,7 @@ namespace MLOOP2_L2_4
             }
 
             Console.WriteLine($" {translations.Count + 1}. Видалити все слово");
-            Console.Write(" Виберіть що видалити: ");
+            Console.Write(" Виберіть що видалити\n > ");
 
             if (int.TryParse(Console.ReadLine(), out int choice))
             {
@@ -364,7 +364,7 @@ namespace MLOOP2_L2_4
         static void ShowAllWords(LanguageDictionary dictionary)
         {
             Console.Clear();
-            Console.WriteLine($" === ВСІ СЛОВА В {dictionary.Title.ToUpper()} ===");
+            Console.WriteLine($"\n === ВСІ СЛОВА В {dictionary.Title.ToUpper()} ===\n");
 
             var allWords = dictionary.GetAllWords();
             if (allWords.Count == 0)
@@ -387,7 +387,7 @@ namespace MLOOP2_L2_4
         static void SearchTranslation()
         {
             Console.Clear();
-            Console.WriteLine(" === ПОШУК ПЕРЕКЛАДУ ===");
+            Console.WriteLine("\n === ПОШУК ПЕРЕКЛАДУ ===\n");
 
             if (dictionaries.Count == 0)
             {
@@ -400,12 +400,12 @@ namespace MLOOP2_L2_4
             {
                 Console.WriteLine($" {i + 1}. {dictionaries[i].Title}");
             }
-            Console.Write(" Виберіть словник: ");
+            Console.Write(" Виберіть словник\n > ");
 
             if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= dictionaries.Count)
             {
                 var dictionary = dictionaries[index - 1];
-                Console.Write(" Введіть слово для пошуку: ");
+                Console.Write(" Введіть слово для пошуку\n > ");
                 string word = Console.ReadLine();
 
                 if (dictionary.ContainsWord(word))
@@ -432,7 +432,7 @@ namespace MLOOP2_L2_4
         static void ExportWord()
         {
             Console.Clear();
-            Console.WriteLine(" === ЕКСПОРТ СЛОВА ===");
+            Console.WriteLine("\n === ЕКСПОРТ СЛОВА ===\n");
 
             if (dictionaries.Count == 0)
             {
@@ -445,12 +445,12 @@ namespace MLOOP2_L2_4
             {
                 Console.WriteLine($" {i + 1}. {dictionaries[i].Title}");
             }
-            Console.Write(" Виберіть словник: ");
+            Console.Write(" Виберіть словник\n > ");
 
             if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= dictionaries.Count)
             {
                 var dictionary = dictionaries[index - 1];
-                Console.Write(" Введіть слово для експорту: ");
+                Console.Write(" Введіть слово для експорту\n > ");
                 string word = Console.ReadLine();
 
                 if (dictionary.ContainsWord(word))
